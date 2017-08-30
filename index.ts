@@ -1,18 +1,6 @@
-const weekdays: ReadonlyArray<string> = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
-];
+const obj: { [key: string]: string } = {};
+obj.hasOwnProperty("foo");
+obj.foo = "bar";
 
-// [ts] Index signature in type 'ReadonlyArray<string>'
-// only permits reading.
-weekdays[0] = "Fancyday"
+console.log(obj.foo)
 
-
-// NOTE: This is only compile time protection. 
-// TypeScript does not force immutability
-console.log(weekdays);
