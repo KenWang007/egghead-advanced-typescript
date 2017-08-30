@@ -1,9 +1,18 @@
-const numbers = [0, 1, 2, [3, 4], 5, [6], [7], 8, [9]];
+const weekdays: ReadonlyArray<string> = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
 
-function isFlat<T>(array: (T | T[])[]): array is T[] {
-    console.log(!array.some(Array.isArray));
-}
+// [ts] Index signature in type 'ReadonlyArray<string>'
+// only permits reading.
+weekdays[0] = "Fancyday"
 
-if (isFlat(numbers)) {
-    numbers;
-}
+
+// NOTE: This is only compile time protection. 
+// TypeScript does not force immutability
+console.log(weekdays);
