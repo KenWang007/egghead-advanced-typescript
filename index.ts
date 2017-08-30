@@ -1,28 +1,24 @@
-enum ShirtSize {
-  XS,
-  S,
-  M,
-  L,
-  XL
+/**
+ * Reverses the given string.
+ * @param string The string to reverse.
+ */
+function reverse(string: string): string;
+
+/**
+ * Reverses the given array.
+ * @param array The array to reverse.
+ */
+function reverse<T>(array: T[]): T[];
+
+function reverse(stringOrArray: string | any[]) {
+    return typeof stringOrArray === "string" 
+    ? [...stringOrArray].reverse().join("") 
+    : stringOrArray.slice().reverse();
 }
 
-function assertNever(value: never): never {
-  // throw Error(`Unexpected value '${value}'`)
-  // Adjusted for plunker output
-  console.log(Error(`Unexpected value '${value}'`));
-}
-
-function prettyPrint(size: ShirtSize) {
-  switch (size) {
-      case ShirtSize.S: console.log("small");
-      case ShirtSize.M: return "medium";
-      case ShirtSize.L: return "large";
-      case ShirtSize.XL: return "extra large";
-      // [ts] Argument of type 'ShirtSize.XS' is
-      // not assignable to parameter of type 'never'.
-      default: return assertNever(size);
-  }
-}
-
-prettyPrint(ShirtSize.S)
-prettyPrint(ShirtSize.XXL)
+// [ts] const reversedString: string 
+const reversedString = reverse("TypeScript");
+// [ts] const reversedArray: number[]
+const reversedArray = reverse([4, 8, 15, 16, 23, 42]);
+console.log(reversedString)
+console.log(reversedArray)
