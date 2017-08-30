@@ -1,6 +1,18 @@
+//modified for plunker
 {
   "compilerOptions": {
-    "target": "es5",
-    "outDir": "lib"
+      "target": "es5",
+      "outDir": "lib",
+      "strictNullChecks": true
   }
 }
+
+// original: 
+// {
+//   "compilerOptions": {
+//       "target": "es5",
+//       "rootDir": "src",
+//       "outDir": "dist",
+//       "strictNullChecks": true
+//   }
+// }
