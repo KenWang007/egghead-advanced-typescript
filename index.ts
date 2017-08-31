@@ -1,41 +1,63 @@
-//string literal types
+type Result<T> =
+| { success: true; value: T }
+| { success: false; error: string };
 
-let autoComplete: "on" | "off" = "on";
-autoComplete = "off";
-// string literal types are case sensitive
-// the following code will throw an error
-// [ts] Type 'ON' is not assignable to type 'autoComplete'
-autoComplete = "ON";
-
-// ============================================================
-// numeric literal types
-
-type NumberBase = 2 | 8 | 10 | 16;
-let base: NumberBase;
-base = 2;
-// [ts] Type '3' is not assignable to type 'NumberBase'
-base = 3;
-
-// ============================================================
-// boolean literal types
-
-let autoFocus: true = true;
-// [ts] Type 'false' is not assignable to type 'true'
-autoFocus = false;
-
-// ============================================================
-// enum literal type
-
-enum Protocols {
-    HTTP,
-    HTTPS,
-    FTP
+function tryParseInt(text: string): Result<number> {
+if (/^-?\d+$/.test(text)) {
+    return {
+        success: true,
+        value: parseInt(text, 10)
+    };
+}
+return {
+    success: false,
+    error: "Invalid number format"
+};
 }
 
-type HyperTextProtocol = Protocols.HTTP | Protocols.HTTPS;
+const result = tryParseInt("42");
 
-let protocol: HyperTextProtocol;
-protocol = Protocols.HTTP;
-protocol = Protocols.HTTPS;
-// [ts] Type 'Protocols.FTP' is not assignable to type 'HyperTextProtocol'
-protocol = Protocols.FTP;
+if (result.success) {
+result;
+console.log(result.value)
+} else {
+result;
+}
+
+
+// ============================================================
+
+interface Cash {
+kind: "cash";
+}
+
+interface PayPal {
+kind: "paypal";
+email: string;
+}
+
+interface CreditCard {
+kind: "creditcard";
+cardNumber: string;
+securityCode: string;
+}
+
+type PaymentMethod = Cash | PayPal | CreditCard;
+
+function stringifyPaymentMethod(method: PaymentMethod): string {
+switch (method.kind) {
+    case "cash":
+        return "Cash";
+    case "paypal":
+        return `PayPal (${method.email})`;
+    case "creditcard":
+        return "Credit Card";
+}
+}
+
+const myPayment = {
+kind: "paypal",
+email: "typescript@egghead.io"
+}
+
+console.log(stringifyPaymentMethod(myPayment))
