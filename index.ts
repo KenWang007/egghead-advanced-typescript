@@ -1,63 +1,43 @@
-type Result<T> =
-| { success: true; value: T }
-| { success: false; error: string };
-
-function tryParseInt(text: string): Result<number> {
-if (/^-?\d+$/.test(text)) {
-    return {
-        success: true,
-        value: parseInt(text, 10)
-    };
-}
-return {
-    success: false,
-    error: "Invalid number format"
+const person = {
+  fullName: "Marius Schulz",
+  blog: "https://blog.mariusschulz.com",
+  twitter: "@mariusschulz"
 };
-}
 
-const result = tryParseInt("42");
+// rest element must be last
+const { fullName, ...socialMedia } = person;
 
-if (result.success) {
-result;
-console.log(result.value)
-} else {
-result;
-}
-
+console.log(fullName);
+console.log(socialMedia.twitter);
 
 // ============================================================
 
-interface Cash {
-kind: "cash";
-}
+const defaultStyles = {
+  fontFamily: "Arial, sans-serif",
+  fontWeight: "normal"
+};
 
-interface PayPal {
-kind: "paypal";
-email: string;
-}
+const userStyles = {
+  color: "#111111",
+  fontWeight: 700
+};
 
-interface CreditCard {
-kind: "creditcard";
-cardNumber: string;
-securityCode: string;
-}
+const styles = {
+  ...defaultStyles,
+  ...userStyles
+};
 
-type PaymentMethod = Cash | PayPal | CreditCard;
+// ============================================================
 
-function stringifyPaymentMethod(method: PaymentMethod): string {
-switch (method.kind) {
-    case "cash":
-        return "Cash";
-    case "paypal":
-        return `PayPal (${method.email})`;
-    case "creditcard":
-        return "Credit Card";
-}
-}
+const todo = {
+  text: "Water the flowers",
+  completed: false,
+  tags: ["garden"]
+};
 
-const myPayment = {
-kind: "paypal",
-email: "typescript@egghead.io"
-}
+const shallowCopy = { ...todo };
+shallowCopy.text = "Mow the lawn";
+shallowCopy.tags.push("weekend");
 
-console.log(stringifyPaymentMethod(myPayment))
+console.log(shallowCopy.text);
+console.log(todo.text);
