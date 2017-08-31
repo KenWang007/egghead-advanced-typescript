@@ -1,43 +1,23 @@
-const person = {
-  fullName: "Marius Schulz",
-  blog: "https://blog.mariusschulz.com",
-  twitter: "@mariusschulz"
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+const todo: Todo = {
+  id: 1,
+  text: "Buy milk",
+  completed: false
 };
 
-// rest element must be last
-const { fullName, ...socialMedia } = person;
+function prop<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
 
-console.log(fullName);
-console.log(socialMedia.twitter);
+const id = prop(todo, "id");
+const text = prop(todo, "text");
+const completed = prop(todo, "completed");
 
-// ============================================================
-
-const defaultStyles = {
-  fontFamily: "Arial, sans-serif",
-  fontWeight: "normal"
-};
-
-const userStyles = {
-  color: "#111111",
-  fontWeight: 700
-};
-
-const styles = {
-  ...defaultStyles,
-  ...userStyles
-};
-
-// ============================================================
-
-const todo = {
-  text: "Water the flowers",
-  completed: false,
-  tags: ["garden"]
-};
-
-const shallowCopy = { ...todo };
-shallowCopy.text = "Mow the lawn";
-shallowCopy.tags.push("weekend");
-
-console.log(shallowCopy.text);
-console.log(todo.text);
+console.log(id)
+console.log(text)
+console.log(completed)
