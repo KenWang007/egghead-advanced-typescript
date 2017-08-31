@@ -1,23 +1,21 @@
-interface Todo {
-  id: number;
-  text: string;
-  completed: boolean;
+interface Point {
+  x: number;
+  y: number;
 }
 
-const todo: Todo = {
-  id: 1,
-  text: "Buy milk",
-  completed: false
+type Nullable<T> = {
+  [P in keyof T]: T[P] | null;
 };
 
-function prop<T, K extends keyof T>(obj: T, key: K): T[K] {
-  return obj[key];
-}
+type Stringify<T> = {
+  [P in keyof T]: string;
+};
 
-const id = prop(todo, "id");
-const text = prop(todo, "text");
-const completed = prop(todo, "completed");
+type PartialNullablePoint = Partial<Nullable<Stringify<Point>>>;
 
-console.log(id)
-console.log(text)
-console.log(completed)
+let point: PartialNullablePoint;
+point = { x: "0", y: "0" };
+point = { x: "0" };
+point = { x: undefined, y: null };
+console.log(point.x)
+console.log(point.y)
