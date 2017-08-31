@@ -1,9 +1,10 @@
 //modified for plunker
 {
   "compilerOptions": {
-      "target": "es2015",
+      "target": "es5",
       "outDir": "lib",
-      "strictNullChecks": true
+      "strictNullChecks": true,
+      "preserveConstEnums": true
   }
 }
 
